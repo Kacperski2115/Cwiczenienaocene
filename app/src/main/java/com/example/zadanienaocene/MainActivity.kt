@@ -16,23 +16,18 @@ class MainActivity : AppCompatActivity() {
         val silniaRun = findViewById<Button>(R.id.Silniarun)
         val silniaInput = findViewById<EditText>(R.id.Silnia)
 
-        silniaRun.setOnClickListener{
+        fun SilniaFunction(input: Int): Int {
+            var silniaResult = 1
+            return if(input==0) silniaResult
+                else input*SilniaFunction(input-1)
+        }
+
+        silniaRun.setOnClickListener {
             val inputint = silniaInput.text.toString().toInt()
-            var silniaResult=1
             if(inputint>10){
                 findViewById<TextView>(R.id.SilniaOut).text=("Podaj liczbe mniejszą od lub równą 10")
             }
-            else{
-                if(inputint==0 || inputint==1){
-                    silniaResult=1
-                }
-                else{
-                    for(i in 2 .. inputint)
-                        silniaResult *= i
-                }
-                val text=silniaResult.toString()
-                findViewById<TextView>(R.id.SilniaOut).text=(text)
-            }
+            else findViewById<TextView>(R.id.SilniaOut).text=(SilniaFunction(inputint).toString())
         }
         val image = findViewById<ImageView>(R.id.image)
         val images = arrayOf(R.drawable.image1, R.drawable.image2, R.drawable.image3)
